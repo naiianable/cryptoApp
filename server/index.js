@@ -1,21 +1,22 @@
-const express = require('express')
-const mongoose = require('mongoose');
-const app = express()
+const config = require('./config/config');
+const dbConnection = require('./config/database');
+const app = require('express')();
 
-require('./config/routes')(app);
-require('dotenv').config();
-const port = process.env.PORT || 3333
+dbConnection().then(() => {
+  
+  require('./config/express')(app);
 
-mongoose.connect(`mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@userdata.dz6ez.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
-let db = mongoose.connection;
+  require('./config/routes')(app);
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Connected!');
-});
+  app.use(function (err, req, res, next) {
+    console.error(err);
+    res.status(500).send(err.message);
+    console.log('*'.repeat(90))
+  })
+
+  app.listen(config.port, console.log(`Example app listening at http://localhost:${config.port}`))
+  
+}).catch(console.error);
 
 
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
