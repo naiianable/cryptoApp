@@ -1,41 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState }from 'react'
 
 const Login = () => {
 
-    const [input, setInput] = useState({
-        username: '',
-        password: ''
-    })
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
 
-    let changeHandler = (event) => {
-        setInput({ 
-            value: event.target,
-        })
-        
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // DO FETCH HERE???
+        //USE RETURNED DATA TO RENDER SOMETHING TO PAGE
+        console.log('This is submit USERNAME', username)
+        console.log('This is handle PASSWORD', password)
     }
+    
+    // const handleChange = (event) => {
+    //     setUserName(event.target.value)
+    //     setPassword(event.target.value)
+    //     console.log('This is handle CHANGE', userName)
+    //     console.log('This is handle CHANGE', password)
+    // }
 
 
     return (
         <div>
             <h1 className="text-center">Login</h1>
             
-                <form className="text-center border border-light p-5" action="" method="POST">
-                    <div className="form-group">
-                    <label>
-                        Username:
-                        <input type="text" className="form-control" name="username"></input>
-                    </label>  
-                    </div>
+                <form className="text-center border border-light" onSubmit={handleSubmit}>
                     
-                    <div className="form-group">
-                    <label>
-                        Password:
-                        <input type="text" className="form-control" name="password"></input>
+                    <br /> 
+
+                    <div>
+                    <label className="form-label">
+                        Username:
+                        <input type="text" className="form-control" name="username" onChange={e => setUserName(e.target.value)} ></input>
                     </label>  
                     </div>
 
+                    <br /> 
+                    
                     <div>
-                        <button>Submit</button>
+                    <label className="form-label">
+                        Password:
+                        <input type="text" className="form-control" name="password" onChange={e => setPassword(e.target.value)}></input>
+                    </label>  
+                    </div>
+
+                    <br /> 
+
+                    <div>
+                        <button className="btn btn-secondary" type="submit">Submit</button>
                     </div>
 
                 </form>
