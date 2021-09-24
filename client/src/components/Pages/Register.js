@@ -5,30 +5,39 @@ const Register = () => {
         <div>
             <h1 className="text-center">Register</h1>
             
-                <form className="text-center border border-light p-5" action="" method="POST">
-                    <div className="form-group">
-                    <label>
+                <form className="text-center border border-light">
+                
+                    <br /> 
+                    
+                    <div>
+                    <label className="form-label">
                         Username:
                         <input type="text" className="form-control" name="username"></input>
                     </label>  
                     </div>
+
+                    <br /> 
                     
-                    <div className="form-group">
-                    <label>
+                    <div>
+                    <label className="form-label">
                         Password:
                         <input type="text" className="form-control" name="password"></input>
                     </label>  
                     </div>
 
-                    <div className="form-group">
-                    <label>
+                    <br /> 
+
+                    <div>
+                    <label className="form-label">
                         Repeat Password:
                         <input type="text" className="form-control" name="repeatpassword"></input>
                     </label>  
                     </div>
 
+                    <br /> 
+
                     <div>
-                        <button>Submit</button>
+                        <button className="btn btn-secondary" type="submit">Submit</button>
                     </div>
 
                 </form>

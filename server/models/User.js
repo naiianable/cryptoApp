@@ -12,7 +12,8 @@ const newUser = new Schema({
         type: String,
         min: 8,
         required: true
-    }
+    },
+    crypto: {}
 });
 
 const User = mongoose.model('User', newUser);
