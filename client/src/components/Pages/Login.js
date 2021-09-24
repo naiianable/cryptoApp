@@ -9,17 +9,19 @@ const Login = () => {
         e.preventDefault();
         // DO FETCH HERE???
         //USE RETURNED DATA TO RENDER SOMETHING TO PAGE
-        console.log('This is submit USERNAME', username)
-        console.log('This is handle PASSWORD', password)
+        console.log('This is submit USERNAME:', username)
+        console.log('This is handle PASSWORD:', password)
     }
     
-    // const handleChange = (event) => {
-    //     setUserName(event.target.value)
-    //     setPassword(event.target.value)
-    //     console.log('This is handle CHANGE', userName)
-    //     console.log('This is handle CHANGE', password)
-    // }
-
+    const handleChange = (e) => {
+        if(e.target.name === 'username') {
+            setUserName(e.target.value);
+        } else if(e.target.name === 'password'){
+            setPassword(e.target.value);  
+        };
+    }
+    // console.log('This is handle USERNAME', username)
+    // console.log('This is handle PASSWORD', password)
 
     return (
         <div>
@@ -32,7 +34,7 @@ const Login = () => {
                     <div>
                     <label className="form-label">
                         Username:
-                        <input type="text" className="form-control" name="username" onChange={e => setUserName(e.target.value)} ></input>
+                        <input type="text" className="form-control" name="username" onChange={handleChange} ></input>
                     </label>  
                     </div>
 
@@ -41,7 +43,7 @@ const Login = () => {
                     <div>
                     <label className="form-label">
                         Password:
-                        <input type="text" className="form-control" name="password" onChange={e => setPassword(e.target.value)}></input>
+                        <input type="text" className="form-control" name="password" onChange={handleChange}></input>
                     </label>  
                     </div>
 
