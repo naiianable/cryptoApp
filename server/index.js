@@ -14,6 +14,8 @@ dbConnection().then(() => {
     console.log('*'.repeat(90))
   })
 
+
+
   app.listen(config.port, console.log(`Example app listening at http://localhost:${config.port}`))
   
 }).catch(console.error);
