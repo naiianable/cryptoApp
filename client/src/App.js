@@ -4,10 +4,12 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+// import { Home, Login, About, Register, Coins } from './components/Pages/';
 import Home from './components/Pages/Home';
 import Login from './components/Pages/Login';
 import About from './components/Pages/About';
 import Register from './components/Pages/Register';
+import Coins from './components/Pages/Coins';
 
 function App() {
 
@@ -23,6 +25,10 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route path="/coins">
+          <Coins />
         </Route>
 
         <Route path="/login">
