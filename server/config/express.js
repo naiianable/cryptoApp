@@ -6,10 +6,12 @@ module.exports = (app) => {
 
     app.use(
         cors({
-            origin: `http://192.168.1.102:3001`
+            origin: `http://localhost:3000`
         }))
 
     app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.use(bodyParser.json());
 
     app.use(cookieParser());
 }
