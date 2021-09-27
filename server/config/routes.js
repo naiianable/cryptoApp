@@ -29,12 +29,9 @@ module.exports = (app) => {
       };
 
       axios(config)
-      .then(function (response) {
-        //console.log('THIS IS RESPONSE.DATA', response.data)
-        res.send(response.data)
-      })
+      .then((response) => res.send(response.data))
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
     })
 
