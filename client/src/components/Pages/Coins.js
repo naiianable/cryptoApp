@@ -1,52 +1,35 @@
-import React, { useState, useEffect } from 'react'
-
+import React from 'react'
+import useFetch from '../FetchApi/Fetch';
 
 const Coins = () => {
 
-    const [coinData, setCoinData] = useState([]);
+    // const [coinData, setCoinData] = useState([]);
 
-    const getCoinData = async () => {
-        const res = await fetch('http://localhost:5000/coins');
-        const data = await res.json();
-        setCoinData(data);
-    }
+    let url = 'http://localhost:5000/coins';
 
-    useEffect(() => {
-        getCoinData()
-    }, [])
+    let coinData = useFetch(url);
+    
+    console.log('THIS IS TEMP', coinData)
+    
 
-    console.log('THIS IS COIN DATA', coinData)
-
-    // fetch data from server /coins
-    // render data in return below
+    
     // useEffect(() => {
+       
+    // }, [])
+    // const getCoinData = () => {
     //     fetch('http://localhost:5000/coins')
-    //     .then(res => {
-    //         console.log(res.json())
-    //         return res.json()
-    //     })
-    //     .then(data => {
-    //         setCoinData(data);
-    //         //console.log('THIS IS DATA', data)
-    //     })
-    //     .catch(err => console.log(err));
+    //         .then(res => res.json())
+    //         .then((data) => {
+    //             // console.log('THIS IS COIN DATA IN FETCH', data);
+    //             setCoinData(data);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     getCoinData()
     // }, []);
 
-    // console.log('THIS IS THE DATA', coinData)
-    
-//     var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "application/json");
-
-//     var requestOptions = {
-//         method: 'GET',
-//         headers: myHeaders,
-//         redirect: 'follow'
-//       };
-
-//     fetch("http://localhost:5000/coins", requestOptions)
-//         .then(response => response.json())
-//         .then(result => console.log(result))
-//         .catch(error => console.log('error', error));
+    // console.log('THIS IS COIN DATA', coinData)
 
     return (
         <div>
