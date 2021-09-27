@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 const useFetch = (url) => {
 
     const [fetchData, setFetchData] = useState([]);
 
-    // const getCoinData = async () => {
-    //     const res = await fetch('http://localhost:5000/coins');
-    //     const data = await res.json();
-    //     setCoinData(data);
-    // }
-    
-   
-  
     useEffect(() => {
-        fetch(url)
-        .then(res => res.json())
-        .then((data) => {
-            // console.log('THIS IS COIN DATA IN FETCH', data);
-            return setFetchData(data);
-        });
+        axios.get(url)
+         .then((res) => {
+             setFetchData(res.data)
+             //console.log(res.data)
+         }) 
+     }, [url]);
+
+    // useEffect(() => {
+    //     fetch(url)
+    //     .then(res => res.json())
+    //     .then((data) => {
+    //         // console.log('THIS IS COIN DATA IN FETCH', data);
+    //         return setFetchData(data);
+    //     });
     
-    }, [url]);
+    // }, [url]);
 
     // console.log('THIS IS GET DATA', fetchData)
 

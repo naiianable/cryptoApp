@@ -3,26 +3,26 @@
 // const utils = require('../utils');
 
 // module.exports = {
-//     get: (req, res, next) => {
-//         let {_id} = req.body;
-//         // console.log(req.body);
-//         // console.log('thisIsTheUser req')
-//         models.User.findOne({_id:_id})
-//             .then((users) => {
-//                 console.log(users);
-//                 res.send(users);
-//             }).catch(next);
-//     },
+// //     get: (req, res, next) => {
+// //         let {_id} = req.body;
+// //         // console.log(req.body);
+// //         // console.log('thisIsTheUser req')
+// //         models.User.findOne({_id:_id})
+// //             .then((users) => {
+// //                 console.log(users);
+// //                 res.send(users);
+// //             }).catch(next);
+// //     },
 
 //     post: {
 //         register: (req, res, next) => {
-//             const { name, email, password, date } = req.body;
-//             // console.log(name);
-//             // console.log(password);
-//             models.User.create({ name, email, password, date })
+//             const { username, email, password } = req.body;
+//             console.log(username);
+//             console.log(password);
+//             models.User.create({ username, email, password })
 //                 .then((createdUser) => {
 //                     console.log(createdUser);
-//                     const token = utils.jwt.createToken({ id: createdUser._id, name:createdUser.name });
+//                     const token = utils.jwt.createToken({ id: createdUser._id, name:createdUser.username });
                     
 //                     res.cookie(config.authCookieName, token, {httpOnly:true});
 //                     console.log('cookie was created');
@@ -90,18 +90,18 @@
 //         }
 //     },
 
-//     put: (req, res, next) => {
-//         const id = req.params.id;
-//         const { name, password } = req.body;
-//         models.User.update({ _id: id }, { name, password })
-//             .then((updatedUser) => res.send(updatedUser))
-//             .catch(next)
-//     },
+// //     put: (req, res, next) => {
+// //         const id = req.params.id;
+// //         const { name, password } = req.body;
+// //         models.User.update({ _id: id }, { name, password })
+// //             .then((updatedUser) => res.send(updatedUser))
+// //             .catch(next)
+// //     },
 
-//     delete: (req, res, next) => {
-//         const id = req.params.id;
-//         models.User.deleteOne({ _id: id })
-//             .then((removedUser) => res.send(removedUser))
-//             .catch(next)
-//     }
+// //     delete: (req, res, next) => {
+// //         const id = req.params.id;
+// //         models.User.deleteOne({ _id: id })
+// //             .then((removedUser) => res.send(removedUser))
+// //             .catch(next)
+// //     }
 // };

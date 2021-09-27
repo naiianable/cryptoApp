@@ -1,35 +1,17 @@
-import React from 'react'
+import React, {  useState, useEffect } from 'react';
+//import axios from 'axios';
 import useFetch from '../FetchApi/Fetch';
 
 const Coins = () => {
 
-    // const [coinData, setCoinData] = useState([]);
-
-    let url = 'http://localhost:5000/coins';
+    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true&price_change_percentage=24h';
 
     let coinData = useFetch(url);
     
-    console.log('THIS IS TEMP', coinData)
-    
+    console.log('THIS IS FETCH DATA', coinData)
 
     
-    // useEffect(() => {
-       
-    // }, [])
-    // const getCoinData = () => {
-    //     fetch('http://localhost:5000/coins')
-    //         .then(res => res.json())
-    //         .then((data) => {
-    //             // console.log('THIS IS COIN DATA IN FETCH', data);
-    //             setCoinData(data);
-    //     });
-    // };
 
-    // useEffect(() => {
-    //     getCoinData()
-    // }, []);
-
-    // console.log('THIS IS COIN DATA', coinData)
 
     return (
         <div>
