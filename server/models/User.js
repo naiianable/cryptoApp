@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 // const Model = mongoose.model;
 
 const newUser = new Schema({
+    email: {
+        type: String,
+        unique: true,
+    },
     username: {
         type: String,
         unique: true,
