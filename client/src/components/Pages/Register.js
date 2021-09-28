@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 const Register = () => {
@@ -9,21 +8,25 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        let userInfo = JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+            repeatPassword: repeatPassword
+        });
+
         fetch('http://localhost:5000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                email: email,
-                username: username,
-                password: password
-            })
+            body: userInfo
         })
-        .then(res => res.json())
-        .then((data) => {
-            console.log('THIS IS DATA', data);
+        .then(res => {res.json()
+        console.log(res)
         })
+        .catch((err) => console.log(err));
         
         // console.log('This is EMAIL:', email)
         // console.log('This is USERNAME:', username)

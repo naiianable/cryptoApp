@@ -1,12 +1,16 @@
 // let user = import('../controllers/user/');
 const axios = require('axios');
 const User = require('../models/User');
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config(); 
 
 module.exports = (app) => {
 
     app.get('/coins', (req, res) => {
+      
       console.log('this is /coins')
+      res.send('Hello World')
 
       // var config = {
       //   method: 'get',
@@ -26,43 +30,44 @@ module.exports = (app) => {
 
 
     app.post('/register', (req, res, next) => {
-      const { username, email, password } = req.body;
-      console.log(req.body)
+      let {  email, username, password } = req.body;
       // console.log(username);
       // console.log(password);
-      User.create({ username, email, password })
-          .then((createdUser) => {
-              console.log(createdUser);
-              // const token = jwt.createToken({ id: createdUser._id, name:createdUser.username });
-              
-              // res.cookie(config.authCookieName, token, {httpOnly:true});
-              // console.log('cookie was created');
-              
-              // const getName = jwt.verifyToken(token).then((response) => {
-              //         let name = response.name;
+      
+      bcrypt.hash(password, +process.env.SALTROUNDS, function(err, hash) {
+        //console.log('THIS IS HASHED PASS', hash);
+        password = hash
 
-              //         if(response.name !== ''){
-              //             console.log(name); 
-              //             res.send({token, name});   
-              //         } else {
-              //             res.send({token});
-              //         }
-              //     })
-          })
-          .catch(next)
-  })
-    // app.get('/register', (req, res) => {
-    //   console.log('THIS IS REGISTER GET');
-    // });
+      User.create({ email, username, password })
+        .then((createdUser) => {
+            console.log('THIS IS CREATED USER', createdUser);
+            console.log(createdUser.password);
 
-    // app.post('/register', (req, res) => {
+          
+            // const token = jwt.createToken({ id: createdUser._id, name:createdUser.username });
+            
+            // res.cookie(config.authCookieName, token, {httpOnly:true});
+            // console.log('cookie was created');
+            
+            // const getName = jwt.verifyToken(token).then((response) => {
+            //         let name = response.name;
 
-    //   console.log('THIS IS REGISTER POST');
-    // })
+            //         if(response.name !== ''){
+            //             console.log(name); 
+            //             res.send({token, name});   
+            //         } else {
+            //             res.send({token});
+            //         }
+            //     })
+        })
+        .catch((err) => console.log(err))
+      })
 
-    // app.get('/login', (req, res) => {
-    //   console.log('This is login')
-    // });
 
+
+      })
+      
+
+      
 
 }

@@ -10,7 +10,8 @@ const useFetch = (url) => {
          .then((res) => {
              setFetchData(res.data)
              //console.log(res.data)
-         }) 
+         })
+         .catch((err) => console.log(err)); 
      }, [url]);
 
     // useEffect(() => {
