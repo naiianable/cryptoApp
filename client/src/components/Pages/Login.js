@@ -1,14 +1,41 @@
 import React, { useState }from 'react'
+import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
+
 
 const Login = () => {
 
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // DO FETCH HERE???
-        //USE RETURNED DATA TO RENDER SOMETHING TO PAGE
+        
+        let userInfo = JSON.stringify({
+            username: username,
+            password: password
+        });
+
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            
+            body: userInfo
+        })
+        .then(res =>  res.json())
+        .then((data) => {
+            setCookie('token', data.token);
+            // Cookies.set('token', data.token)
+        })
+        .catch((err) => console.log(err));
+
+        //console.log('THIS IS COOKIES', cookies);
+        
+        
+
         console.log('This is submit USERNAME:', username)
         console.log('This is handle PASSWORD:', password)
     }

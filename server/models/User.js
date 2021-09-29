@@ -17,21 +17,11 @@ const newUser = new Schema({
         min: 8,
         required: true
     },
+    coins: {
+        type: [[String]],
+    }
     
 });
-
-// const userCoins = new Schema({
-//     username: {
-//         type: String,
-//         min: 6,
-//         required: true
-//     },
-//     coinId: {
-//         type: String,
-//         required: true
-//     },
-    
-// });
 
 
 const User = mongoose.model('User', newUser);
