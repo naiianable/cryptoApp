@@ -3,9 +3,11 @@ const axios = require('axios');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 require('dotenv').config(); 
 
 module.exports = (app) => {
+
 
     app.get('/coins', (req, res) => {
       
@@ -65,7 +67,43 @@ module.exports = (app) => {
 
 
 
-      })
+      });
+
+      app.post('/login', async (req, res) => {
+        let { username, password } = req.body;
+
+        let userData = await User.findOne({ username: username })
+        console.log(userData);
+        let userId = userData._id;
+        let userPass = userData.password
+
+        bcrypt.compare(password, userData.password)
+        .then((result) => {
+          if(result) {
+            let payload = ({ userId, userPass });
+            let options = { expiresIn: '1hr' };
+
+            let token = jwt.sign(payload, process.env.SECRET, options);
+
+            res.send({ token });
+            // res.cookie('token', token, { 
+            //   httpOnly: true, 
+            //   maxAge: 3600 * 1000, 
+            // });
+            //console.log('THIS IS TOKEN', token)
+          }
+        })
+        
+        
+
+        
+
+         
+        
+        
+
+
+      });
       
 
       
