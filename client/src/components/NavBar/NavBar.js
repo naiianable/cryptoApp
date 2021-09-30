@@ -12,21 +12,37 @@ const NavBar = () => {
         removeCookie('loggedIn');
     }
 
-    return (
-        
+    let navBar;
+
+    if(!cookie.loggedIn) {
+        navBar = 
             <div>
                 <nav className="navbar navbar-light bg-light">
-                    <p>This is our crypto app</p>
+                    <img src={require('../../images/sifterImg.jpg').default} height={50} width={50} />
+                    <Link className="navbar-brand" to="/">Home</Link>
+                    <Link className="navbar-brand" to="/about">About</Link>
+                    <Link className="navbar-brand" to="/coins">Coins</Link>
+                    <Link className="navbar-brand" to="/register">Register</Link>
+                    <Link className="navbar-brand" to="/login">Login</Link>
+                </nav>
+            </div>
+    } else {
+        navBar = 
+            <div>
+                <nav className="navbar navbar-light bg-light">
+                    <p>Sifter</p>
                     <Link className="navbar-brand" to="/">Home</Link>
                     <Link className="navbar-brand" to="/about">About</Link>
                     <Link className="navbar-brand" to="/coins">Coins</Link>
                     <Link className="navbar-brand" to="/list">List</Link>
-                    <Link className="navbar-brand" to="/login">Login</Link>
-                    <Link className="navbar-brand" to="/register">Register</Link>
                     <Link onClick={logout} className="navbar-brand" to="/">Logout</Link>
                 </nav>
             </div>
+    }
+
+    return (
         
+        navBar
         
     )
 }

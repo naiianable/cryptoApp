@@ -1,24 +1,26 @@
-const { check, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 let User = require('../models/User');
 
-let validationBodyRules = [
+exports.login = [
 
-    check('username', 'Username Invalid')
+    body('username', 'Username Invalid')
     .trim()
     .isAlphanumeric()
     .isLength({ min: 6 })
-    .custom((value, { req }) => {
-        User.findOne({ username: value })
-        //console.log(value)
+    .custom((value) => {
+        return User.findOne({ username: value })
         .then(user => {
-            console.log('THIS IS USER', user)
             if(!user) {
-                return Promise.reject('Error: Username/Password Invalid');
-            }
-        });
-    })
+                return Promise.reject('Username does not exist');
+            } 
+        })
 
+    }),
 
+    body('password', 'Password Invalid')
+    .trim()
+    .isAlphanumeric()
+    .isLength({ min: 8 })
+    
 ];
 
-module.exports = validationBodyRules;
