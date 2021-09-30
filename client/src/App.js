@@ -10,6 +10,7 @@ import Login from './components/Pages/Login';
 import About from './components/Pages/About';
 import Register from './components/Pages/Register';
 import Coins from './components/Pages/Coins';
+import List from './components/Pages/List';
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
 
         <Route path="/coins">
           <Coins />
+        </Route>
+
+        <Route path="/list">
+          <List />
         </Route>
 
         <Route path="/login">

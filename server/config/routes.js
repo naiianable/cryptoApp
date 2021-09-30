@@ -3,6 +3,8 @@ const axios = require('axios');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const auth = require('../utils/auth');
+const { check, validationResult } = require('express-validator');
 
 require('dotenv').config(); 
 
@@ -69,36 +71,42 @@ module.exports = (app) => {
 
       });
 
-      app.post('/login', async (req, res) => {
+      app.post('/login', auth, async (req, res) => {
         let { username, password } = req.body;
+        let loggedIn;
+        // let errors = validationResult(req)
 
-        let userData = await User.findOne({ username: username })
-        console.log(userData);
-        let userId = userData._id;
-        let userPass = userData.password
+        //if(!errors.isEmpty()) {
+          // console.log('THESE ARE ERRORS', errors)
+          // loggedIn = false;
+          // res.send({ errors });
+        //} else {
+          let userData = await User.findOne({ username: username })
+            console.log(userData);
+            let userId = userData._id;
+            let userPass = userData.password
 
-        bcrypt.compare(password, userData.password)
-        .then((result) => {
-          if(result) {
-            let payload = ({ userId, userPass });
-            let options = { expiresIn: '1hr' };
+            bcrypt.compare(password, userData.password)
+            .then((result) => {
+              if(result) {
+                let payload = ({ userId, userPass });
+                let options = { expiresIn: '1hr' };
 
-            let token = jwt.sign(payload, process.env.SECRET, options);
+                let token = jwt.sign(payload, process.env.SECRET, options);
+                
 
-            res.send({ token });
-            // res.cookie('token', token, { 
-            //   httpOnly: true, 
-            //   maxAge: 3600 * 1000, 
-            // });
-            //console.log('THIS IS TOKEN', token)
-          }
-        })
+                res.send({ token, loggedIn });
+                // res.cookie('token', token, { 
+                //   httpOnly: true, 
+                //   maxAge: 3600 * 1000, 
+                // });
+                console.log('THIS IS TOKEN', token)
+              }
+            })
+
+        //}
         
-        
 
-        
-
-         
         
         
 
