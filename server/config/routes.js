@@ -67,22 +67,23 @@ module.exports = (app) => {
         .catch((err) => console.log(err))
       })
 
+    });
 
-
-      });
-
-      app.post('/login', auth, async (req, res) => {
+      app.post('/login', auth.login, async (req, res) => {
         let { username, password } = req.body;
         let loggedIn;
-        // let errors = validationResult(req)
+        let errors = validationResult(req)
+        // console.log(errors)
 
-        //if(!errors.isEmpty()) {
-          // console.log('THESE ARE ERRORS', errors)
-          // loggedIn = false;
-          // res.send({ errors });
-        //} else {
+        if(!errors.isEmpty()) {
+          let errorMsg = errors.errors[0].msg
+          console.log('THIS IS THE ERROR MSG', errorMsg)
+          console.log('THESE ARE ERRORS', errors)
+          
+          res.send({ errorMsg });
+        } else {
           let userData = await User.findOne({ username: username })
-            console.log(userData);
+            //console.log(userData);
             let userId = userData._id;
             let userPass = userData.password
 
@@ -96,20 +97,14 @@ module.exports = (app) => {
                 
 
                 res.send({ token, loggedIn });
-                // res.cookie('token', token, { 
-                //   httpOnly: true, 
-                //   maxAge: 3600 * 1000, 
-                // });
-                console.log('THIS IS TOKEN', token)
-              }
-            })
+                //console.log('THIS IS TOKEN', token)
+              } else {
+                 res.send({ errorMsg: 'Invalid Password' });
+                 
+              };
+            });
 
-        //}
-        
-
-        
-        
-
+        };
 
       });
       
