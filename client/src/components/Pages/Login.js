@@ -1,5 +1,4 @@
 import React, { useState }from 'react'
-import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
 
 
@@ -7,7 +6,7 @@ const Login = () => {
 
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [cookies, setCookie] = useCookies(['token', 'loggedIn', 'errors']);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,23 +21,31 @@ const Login = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            
             body: userInfo
         })
-        .then(res =>  res.json())
+        .then(res => res.json())
         .then((data) => {
             setCookie('token', data.token);
-            // Cookies.set('token', data.token)
+            setCookie('loggedIn', true);
+            // setCookie('errors', data.errors);
+            console.log('THIS IS DATA', data)
         })
         .catch((err) => console.log(err));
 
-        //console.log('THIS IS COOKIES', cookies);
+        console.log('THIS IS COOKIES', cookies);
         
-        
+        // if(cookies.loggedIn) {
+        //     console.log('we logged in')
+        // } else {
+        //     console.log('nope, not logged in')
+        // }
 
-        console.log('This is submit USERNAME:', username)
-        console.log('This is handle PASSWORD:', password)
+        // console.log('This is submit USERNAME:', username)
+        // console.log('This is handle PASSWORD:', password)
     }
+
+
+
     
     const handleChange = (e) => {
         if(e.target.name === 'username') {

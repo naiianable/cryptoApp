@@ -18,7 +18,8 @@ const newUser = new Schema({
         required: true
     },
     coins: {
-        type: [[String]],
+        type: Map,
+        of: Number
     }
     
 });
