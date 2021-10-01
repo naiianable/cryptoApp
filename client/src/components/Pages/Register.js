@@ -9,6 +9,7 @@ const Register = () => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [errorMsg, setErrorMsg] = useState();
+    const [successMsg, setSuccessMsg] = useState();
     const [repeatPassword, setRepeatPassword] = useState();
 
     const handleSubmit = async (e) => {
@@ -34,7 +35,11 @@ const Register = () => {
             if(data.errorMsg) {
                 setErrorMsg(data.errorMsg)
             } else {
-                history.push('/login')
+                setErrorMsg(null);
+                setSuccessMsg("Registration successful. Login to start sifting!");
+                setTimeout(() => {
+                    history.push('/login');
+                }, 2500);
             }
             
             console.log('THIS IS DATA', data)
@@ -46,12 +51,7 @@ const Register = () => {
 
 
     }
-        // useEffect(() => {
-        //     if(errorMsg) {
-        //         console.log('THIS IS ERROR MSG', errorMsg)
-        //     }
-            
-        // }, [errorMsg])
+
         
     
     
@@ -72,8 +72,18 @@ const Register = () => {
         <div>
             <h1 className="text-center">Register</h1>
 
+                {successMsg && 
+                    <div className="d-flex justify-content-center">
+                        <div className="alert alert-success" role="alert">{successMsg}</div>
+                    </div>      
+                }
+
                 {errorMsg && 
-                    <div className="alert alert-primary" role="alert"> {errorMsg} </div>}
+                    <div className="d-flex justify-content-center">
+                        <div className="alert alert-danger" role="alert">{errorMsg}</div>
+                    </div>      
+                }
+                      
             
                 <form className="text-center border border-light" onSubmit={handleSubmit}>
                 

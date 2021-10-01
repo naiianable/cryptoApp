@@ -44,6 +44,7 @@ module.exports = (app) => {
         let errorMsg = errors.errors[0].msg;
 
         res.send({ errorMsg });
+
       } else {
         bcrypt.hash(password, +process.env.SALTROUNDS, function(err, hash) {
         //console.log('THIS IS HASHED PASS', hash);
@@ -53,7 +54,7 @@ module.exports = (app) => {
           .then((createdUser) => {
             let userCreated;
               console.log('THIS IS CREATED USER', createdUser);
-              console.log(createdUser.password);
+              // console.log(createdUser.password);
               // had to send userCreated for react side to push properly
               res.send({ userCreated })
 
