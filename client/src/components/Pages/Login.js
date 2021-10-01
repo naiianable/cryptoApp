@@ -75,7 +75,10 @@ const Login = () => {
             <h1 className="text-center">Login</h1>
 
                 {errorMsg && 
-                <div className="alert alert-primary" role="alert"> {errorMsg} </div>}
+                <div className="d-flex justify-content-center">
+                    <div className="alert alert-danger" role="alert"> {errorMsg} </div>
+                </div>
+                }
             
                 <form className="text-center border border-light" onSubmit={handleSubmit}>
                     
