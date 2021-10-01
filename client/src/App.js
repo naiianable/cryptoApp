@@ -11,6 +11,7 @@ import About from './components/Pages/About';
 import Register from './components/Pages/Register';
 import Coins from './components/Pages/Coins';
 import List from './components/Pages/List';
+import Table from './components/Pages/Table';
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
           <List />
         </Route>
 
+        <Route path="/table">
+          <Table />
+        </Route>
+
         <Route path="/login">
           <Login />
         </Route>
@@ -50,6 +55,7 @@ function App() {
       </Switch>
       
       </Router>
+
     </div>
     
   );
