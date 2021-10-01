@@ -14,14 +14,14 @@ const Coins = () => {
 
 
     return (
-        <div>
+        <>
             <body>
                 <tr>
-                    <th>COIN</th>
+                    <td>COIN</td>
            
-                    <th>PRICE</th>
+                    <td>PRICE</td>
          
-                    <th>CHANGE</th>
+                    <td>CHANGE</td>
 
                     
                 </tr>
@@ -39,7 +39,7 @@ const Coins = () => {
             </body>
                 
                 
-        </div>
+        </>
     )
 }
 

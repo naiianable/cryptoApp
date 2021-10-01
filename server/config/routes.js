@@ -33,39 +33,37 @@ module.exports = (app) => {
 
 
 
-    app.post('/register', (req, res, next) => {
+    app.post('/register', auth.register, (req, res, next) => {
       let {  email, username, password } = req.body;
       // console.log(username);
       // console.log(password);
-      
-      bcrypt.hash(password, +process.env.SALTROUNDS, function(err, hash) {
+      let errors = validationResult(req);
+
+      if(!errors.isEmpty()) {
+        console.log('THESE ARE THE ERRORS', errors)
+        let errorMsg = errors.errors[0].msg;
+
+        res.send({ errorMsg });
+      } else {
+        bcrypt.hash(password, +process.env.SALTROUNDS, function(err, hash) {
         //console.log('THIS IS HASHED PASS', hash);
         password = hash
 
-      User.create({ email, username, password })
-        .then((createdUser) => {
-            console.log('THIS IS CREATED USER', createdUser);
-            console.log(createdUser.password);
+        User.create({ email, username, password })
+          .then((createdUser) => {
+            let userCreated;
+              console.log('THIS IS CREATED USER', createdUser);
+              console.log(createdUser.password);
+              // had to send userCreated for react side to push properly
+              res.send({ userCreated })
 
-          
-            // const token = jwt.createToken({ id: createdUser._id, name:createdUser.username });
-            
-            // res.cookie(config.authCookieName, token, {httpOnly:true});
-            // console.log('cookie was created');
-            
-            // const getName = jwt.verifyToken(token).then((response) => {
-            //         let name = response.name;
+          })
+          .catch((err) => console.log(err))
+        });
 
-            //         if(response.name !== ''){
-            //             console.log(name); 
-            //             res.send({token, name});   
-            //         } else {
-            //             res.send({token});
-            //         }
-            //     })
-        })
-        .catch((err) => console.log(err))
-      })
+      }
+      
+      
 
     });
 
@@ -100,9 +98,10 @@ module.exports = (app) => {
                 //console.log('THIS IS TOKEN', token)
               } else {
                  res.send({ errorMsg: 'Invalid Password' });
-                 
+
               };
-            });
+            })
+            .catch((err) => console.log(err));
 
         };
 
