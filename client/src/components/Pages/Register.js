@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
+
+    const history = useHistory();
+
     const [email, setEmail] = useState();
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [errorMsg, setErrorMsg] = useState();
     const [repeatPassword, setRepeatPassword] = useState();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         let userInfo = JSON.stringify({
@@ -16,23 +21,39 @@ const Register = () => {
             repeatPassword: repeatPassword
         });
 
-        fetch('http://localhost:5000/register', {
+        await fetch('http://localhost:5000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: userInfo
         })
-        .then(res => {res.json()
-        console.log(res)
+        .then(res => res.json())
+        .then((data) => {
+
+            if(data.errorMsg) {
+                setErrorMsg(data.errorMsg)
+            } else {
+                history.push('/login')
+            }
+            
+            console.log('THIS IS DATA', data)
+        
+
         })
         .catch((err) => console.log(err));
-        
-        // console.log('This is EMAIL:', email)
-        // console.log('This is USERNAME:', username)
-        // console.log('This is PASSWORD:', password)
-        // console.log('This is repeatPASSWORD:', repeatPassword)
+            
+
+
     }
+        // useEffect(() => {
+        //     if(errorMsg) {
+        //         console.log('THIS IS ERROR MSG', errorMsg)
+        //     }
+            
+        // }, [errorMsg])
+        
+    
     
     const handleChange = (e) => {
         if (e.target.name === 'email') {
@@ -50,6 +71,9 @@ const Register = () => {
     return (
         <div>
             <h1 className="text-center">Register</h1>
+
+                {errorMsg && 
+                    <div className="alert alert-primary" role="alert"> {errorMsg} </div>}
             
                 <form className="text-center border border-light" onSubmit={handleSubmit}>
                 

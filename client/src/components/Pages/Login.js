@@ -59,24 +59,23 @@ const Login = () => {
         };
     }
 
+    useEffect(() => {
         if(!cookie.loggedIn) {
             history.push('/login')
             
         } else {
             history.push('/coins');
         }
+    })
+        
 
 
     return (
         <div>
             <h1 className="text-center">Login</h1>
 
-            
-            
                 {errorMsg && 
                 <div className="alert alert-primary" role="alert"> {errorMsg} </div>}
-            
-            
             
                 <form className="text-center border border-light" onSubmit={handleSubmit}>
                     
