@@ -1,0 +1,27 @@
+
+.add-coin {
+    cursor: pointer;
+    
+} 
+
+.add-coin > svg {
+    pointer-events: none;
+  }
+
+.coin-name {
+    text-align: center;
+    color: goldenrod;
+}
+
+.logo {
+    width: 10%;
+    height: 'auto';
+}
+
+.rank {
+    text-align: center;
+}
+
+.table {
+    width: auto;
+}
