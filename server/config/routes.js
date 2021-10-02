@@ -68,47 +68,74 @@ module.exports = (app) => {
 
     });
 
-      app.post('/login', auth.login, async (req, res) => {
-        let { username, password } = req.body;
-        let loggedIn;
-        let errors = validationResult(req)
-        // console.log(errors)
+    app.post('/login', auth.login, async (req, res) => {
+      let { username, password } = req.body;
+      let loggedIn;
+      let errors = validationResult(req)
+      // console.log(errors)
 
-        if(!errors.isEmpty()) {
-          let errorMsg = errors.errors[0].msg
-          console.log('THIS IS THE ERROR MSG', errorMsg)
-          console.log('THESE ARE ERRORS', errors)
-          
-          res.send({ errorMsg });
-        } else {
-          let userData = await User.findOne({ username: username })
-            //console.log(userData);
-            let userId = userData._id;
-            let userPass = userData.password
+      if(!errors.isEmpty()) {
+        let errorMsg = errors.errors[0].msg
+        console.log('THIS IS THE ERROR MSG', errorMsg)
+        console.log('THESE ARE ERRORS', errors)
+        
+        res.send({ errorMsg });
+      } else {
+        let userData = await User.findOne({ username: username })
+          //console.log(userData);
+          let userId = userData._id;
+          let userPass = userData.password
 
-            bcrypt.compare(password, userData.password)
-            .then((result) => {
-              if(result) {
-                let payload = ({ userId, userPass });
-                let options = { expiresIn: '1hr' };
+          bcrypt.compare(password, userData.password)
+          .then((result) => {
+            if(result) {
+              let payload = ({ userId, userPass });
+              let options = { expiresIn: '1hr' };
 
-                let token = jwt.sign(payload, process.env.SECRET, options);
-                
+              let token = jwt.sign(payload, process.env.SECRET, options);
+              
 
-                res.send({ token, loggedIn });
-                //console.log('THIS IS TOKEN', token)
-              } else {
-                 res.send({ errorMsg: 'Invalid Password' });
+              res.send({ token, loggedIn });
+              //console.log('THIS IS TOKEN', token)
+            } else {
+                res.send({ errorMsg: 'Invalid Password' });
 
-              };
-            })
-            .catch((err) => console.log(err));
+            };
+          })
+          .catch((err) => console.log(err));
 
-        };
+      };
 
-      });
+    });
       
+    app.post('/coins', async (req, res) => {
 
+      let token = req.body.user;
+      let decoded = jwt.verify(token, process.env.SECRET)
+
+      let newCoin = req.body.id
+      console.log('NEW COIN', newCoin)
+
+
+      User.findById(decoded.userId, (err, user) => {
+
+        let coinChecker = user.userCoins.filter(coin => coin.hasOwnProperty(newCoin));
+
+        if(coinChecker.length === 0) {
+          let coinObj = { [newCoin]: 0 }
+
+          user.userCoins.push(coinObj)
+          user.save((err, res) => {
+            if(err) return console.error(err)
+          });
+
+        } else {
+          console.log('ALREADY OWN THIS THING')
+        }
+        console.log('USER', user)
+      })
+      console.log('THIS IS THE REQ.BODY', req.body)
+    })
       
 
 }

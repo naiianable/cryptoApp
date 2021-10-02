@@ -34,12 +34,12 @@ const Login = () => {
                 setCookie('token', data.token);
                 setCookie('loggedIn', true);
             } else if(data.errorMsg) {
-                setErrorMsg(data.errorMsg)
+                setErrorMsg(data.errorMsg);
             }
-            console.log('THIS IS ERROR MSG', errorMsg)
+            console.log('THIS IS ERROR MSG', errorMsg);
             
             // setCookie('errors', data.errors);
-            console.log('THIS IS DATA', data)
+            console.log('THIS IS DATA', data);
         })
         .catch((err) => console.log(err));
 
