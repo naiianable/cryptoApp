@@ -1,19 +1,16 @@
-import React, {  useState, useEffect } from 'react';
+// import React, {  useState, useEffect } from 'react';
 import useFetch from '../FetchApi/Fetch';
-import { useCookies } from 'react-cookie';
 import cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from 'react-router-dom';
 
 import './coins.css';
 
 
 const Coins = () => {
 
-    const history = useHistory();
 
-    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true&price_change_percentage=24h';
+    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h';
 
     let coinData = useFetch(url)
 
@@ -60,13 +57,12 @@ const Coins = () => {
                     <tr style={{textAlign: 'center'}}>
                         <th></th>
                         <th>RANK</th>
-                        <th style={{width: '25%'}}>NAME</th>
+                        <th style={{width: '15%'}}>NAME</th>
                         <th>COIN</th>             
                         <th>SYMBOL</th>
-                        {/* <th></th> */}
                         <th>PRICE</th>
-                        <th>24H CHANGE</th>
-                        <th>MARKET CAP</th>
+                        <th>24H PRICE CHANGE</th>
+                        <th>24H % CHANGE</th>
                     </tr>
                 </thead>
                 
@@ -82,10 +78,9 @@ const Coins = () => {
                             <td className='coin-name'><img className="logo" src={coin.image} alt=""/>{coin.name}</td>
                             <td>{coin.id}</td>      
                             <td>{coin.symbol}</td>                     
-                            {/* <td>$</td> */}
-                            <td>${coin.current_price}</td>
-                            <td>${coin.price_change_24h}</td>
-                            <td>${coin.market_cap}</td>
+                            <td>${coin.current_price.toFixed(2)}</td>
+                            <td>${coin.price_change_24h.toFixed(2)}</td>
+                            <td>{coin.price_change_percentage_24h.toFixed(2)}%</td>
                         </tr>                 
                     )}
                 </tbody>

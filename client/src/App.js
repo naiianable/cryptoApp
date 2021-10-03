@@ -37,10 +37,6 @@ function App() {
           <List />
         </Route>
 
-        <Route path="/table">
-          <Table />
-        </Route>
-
         <Route path="/login">
           <Login />
         </Route>
