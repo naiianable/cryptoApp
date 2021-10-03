@@ -10,7 +10,7 @@ const Login = () => {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [errorMsg, setErrorMsg] = useState();
-    const [cookie, setCookie] = useCookies(['token', 'loggedIn']);
+    const [cookie, setCookie, removeCookie] = useCookies(['token', 'loggedIn']);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,12 +32,25 @@ const Login = () => {
             
             if(data.token) {
                 setCookie('token', data.token);
-                setCookie('loggedIn', true);
+                setCookie('loggedIn', true );
+                    
+                    setTimeout(() => {
+                        removeCookie('loggedIn')
+                        removeCookie('token')
+                    }, 3600 * 1000);
+
+                    setTimeout(() => {
+                        alert('5 minutes left to sift for your protection!')
+                    }, 3300 * 1000);
+                    
+                
             } else if(data.errorMsg) {
                 setErrorMsg(data.errorMsg);
             }
             console.log('THIS IS ERROR MSG', errorMsg);
             
+            
+
             // setCookie('errors', data.errors);
             console.log('THIS IS DATA', data);
         })

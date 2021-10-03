@@ -31,7 +31,7 @@ module.exports = (app) => {
       // });
     });
 
-
+    
 
     app.post('/register', auth.register, (req, res, next) => {
       let {  email, username, password } = req.body;
@@ -130,12 +130,26 @@ module.exports = (app) => {
           });
 
         } else {
-          console.log('ALREADY OWN THIS THING')
+          // res.send('Already')
         }
         console.log('USER', user)
       })
       console.log('THIS IS THE REQ.BODY', req.body)
-    })
-      
+    });
+
+    app.post('/list', (req, res) => {
+     
+      console.log('THIS IS REQ.BODY', req.body)
+      let decoded = jwt.verify(req.body.token, process.env.SECRET)
+
+      User.findById(decoded.userId)
+      .then(user => {
+        console.log(user)
+        res.send(user.userCoins);
+        
+      })
+
+      console.log('THE TOKEN', decoded)
+    });
 
 }
