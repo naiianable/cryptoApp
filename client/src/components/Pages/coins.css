@@ -8,6 +8,13 @@
     pointer-events: none;
   }
 
+.amount {
+    width: 100%;
+    height: 'auto';
+    padding-top: 20px;
+    line-height: 10%;
+}
+
 .coin-name {
     text-align: center;
     color: goldenrod;

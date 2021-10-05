@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('../utils/auth');
 const { check, validationResult } = require('express-validator');
+const Coin = require('../models/UserCoins');
 
 require('dotenv').config(); 
 
@@ -96,7 +97,7 @@ module.exports = (app) => {
               
 
               res.send({ token, loggedIn });
-              //console.log('THIS IS TOKEN', token)
+              console.log('THIS IS TOKEN', token)
             } else {
                 res.send({ errorMsg: 'Invalid Password' });
 
@@ -138,18 +139,55 @@ module.exports = (app) => {
     });
 
     app.post('/list', (req, res) => {
-     
+
       console.log('THIS IS REQ.BODY', req.body)
       let decoded = jwt.verify(req.body.token, process.env.SECRET)
-
+      
+      
+      //finding user whos logged in
       User.findById(decoded.userId)
       .then(user => {
-        console.log(user)
-        res.send(user.userCoins);
         
-      })
+      let updatedArray = [];
+  
+        if(req.body.type === 'delete') {
+          //edit userCoins based on id 
+          console.log('THIS IS USER', user)
+          
+          //filter through usercoins and compare with key from req.body.id returned from delete click
+          updatedArray = user.userCoins.filter(coin => {
+            for(coinName in coin) { 
+              if(coinName !== req.body.id) {
+                updatedArray.push(coin)
+              }
+            }
+            user.userCoins = updatedArray;
+            
+          })
+          user.save((err, result) => {
+            if(err) return console.log(err);
 
-      console.log('THE TOKEN', decoded)
+            console.log('THIS IS THE RESULT', result)
+            res.send(result.userCoins);
+          });
+          // console.log('THIS IS UPDATED USER', user)
+          // console.log('we gonna delete something')
+        } else {
+          //send back user data to display coins
+          
+
+          
+          res.send(user);
+          console.log('THE TOKEN', decoded)
+          
+          }
+
+          
+          
+        })
+      
+     
+      
     });
 
 }
