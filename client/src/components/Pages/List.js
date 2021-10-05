@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import cookies from 'js-cookie';
 import Fetch from '../FetchApi/Fetch';
 import { FaRegTimesCircle } from 'react-icons/fa';
-import { FaRegSave } from 'react-icons/fa';
+import { MdOutlineSaveAlt } from 'react-icons/md';
+import { FaBeer } from 'react-icons/fa';
+import { FaAngellist } from 'react-icons/fa';
+import { FaEgg } from 'react-icons/fa';
 import './coins.css'
 
 
@@ -10,7 +13,7 @@ const List = () => {
 
     const [userCoins, setUserCoins] = useState([]);
     const [amount, setAmount] = useState('');
-    const [saveIcon, setSaveIcon] = useState(null);
+    const [saveIcon, setSaveIcon] = useState(false);
     const [coinId, setCoinId] = useState('');
     
 
@@ -57,11 +60,11 @@ const List = () => {
         // console.log('COIN ARRAY', displayArray)
 
     
-       let iconAppear = (e) => {
-        console.log(e.target.id)
-            setAmount(e.target.value);
-            setCoinId(e.target.id)
-       } 
+    let iconAppear = (e) => {
+    console.log(e.target.id)
+        setAmount(e.target.value);
+        setCoinId(e.target.id)
+    } 
     
     useEffect(() => {
         if(amount.length > 0) {
@@ -115,13 +118,10 @@ const List = () => {
                 <table className="table">
                    
                     <thead >
+                        
                         <tr style={{textAlign: 'center'}}>
                             
                             <th style={{width:'5%'}}>AMOUNT</th>
-                            {saveIcon &&
-                                <th></th>
-                            }
-                            
                             <th style={{width: '15%'}}>NAME</th>
                             <th>COIN</th>             
                             <th>SYMBOL</th>
@@ -132,17 +132,24 @@ const List = () => {
                         </tr>
                     </thead>
                     
-                    <tbody>
+                    
+
+                    <tbody>   
                     {displayArray.map(coin => 
                         
 
                         <tr style={{textAlign: 'center'}} key={coin.id}>
                            
-                            <input className="amount" id={coin.id} type="text" maxLength="7" onChange={iconAppear}/>
-
-                        {saveIcon &&
-                            <td><FaRegSave style={{ color: 'PowderBlue'}} onClick={saveAmount}  /> </td>}
-
+                            <td>
+                                <input className="form-control" id={coin.id} type="text" maxLength="10" onChange={iconAppear} />
+                                    {saveIcon && coinId === coin.id &&
+                                    <>
+                                        <td><MdOutlineSaveAlt style={{ color: 'PowderBlue'}} id={coin.id} onClick={saveAmount}  /> </td>
+                                        <td><FaBeer style={{ color: 'Tomato'}} id={coin.id} onClick={saveAmount}  /> </td>
+                                        <td><FaAngellist style={{ color: 'Lime'}} id={coin.id} onClick={saveAmount}  /> </td>
+                                        <td><FaEgg style={{ color: 'PaleGoldenRod'}} id={coin.id} onClick={saveAmount}  /> </td>
+                                        </>}
+                            </td>
 
                             <td className='coin-name'><img className="logo" src={coin.image} alt=""/>{coin.name}</td>
                             <td>{coin.id}</td>      
@@ -157,7 +164,7 @@ const List = () => {
 
                             
                         </tr>  
-                                  
+                            
                     )}
                 </tbody>
                    
