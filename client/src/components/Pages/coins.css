@@ -8,11 +8,13 @@
     pointer-events: none;
   }
 
-.amount {
-    width: 100%;
+.form-control {
+    /* width: 100%;
     height: 'auto';
     padding-top: 20px;
-    line-height: 10%;
+    line-height: 10%; */
+
+
 }
 
 .coin-name {
