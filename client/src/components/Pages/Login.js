@@ -32,16 +32,18 @@ const Login = () => {
             
             if(data.token) {
                 setCookie('token', data.token);
-                setCookie('loggedIn', true );
+                setCookie('loggedIn', true);
                     
+                //Log out user after one hour and clear cookies, alert msg at 55 min
                     setTimeout(() => {
                         removeCookie('loggedIn')
                         removeCookie('token')
-                    }, 3600 * 1000);
+                        history.push('/');
+                    }, 1000 * 3600);
 
                     setTimeout(() => {
                         alert('5 minutes left to sift for your protection!')
-                    }, 3300 * 1000);
+                    }, 1000 * 3300);
                     
                 
             } else if(data.errorMsg) {
@@ -77,7 +79,7 @@ const Login = () => {
             history.push('/login')
             
         } else {
-            history.push('/coins');
+            history.push('/list');
         }
     })
         
