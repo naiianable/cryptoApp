@@ -91,7 +91,7 @@ module.exports = (app) => {
           .then((result) => {
             if(result) {
               let payload = ({ userId, userPass });
-              let options = { expiresIn: '1hr' };
+              let options = { expiresIn: '1h' };
 
               let token = jwt.sign(payload, process.env.SECRET, options);
               
@@ -115,7 +115,7 @@ module.exports = (app) => {
       let decoded = jwt.verify(token, process.env.SECRET)
 
       let newCoin = req.body.id
-      console.log('NEW COIN', newCoin)
+      //console.log('NEW COIN', newCoin)
 
 
       User.findById(decoded.userId, (err, user) => {
@@ -139,55 +139,84 @@ module.exports = (app) => {
     });
 
     app.post('/list', (req, res) => {
-
-      console.log('THIS IS REQ.BODY', req.body)
+        
       let decoded = jwt.verify(req.body.token, process.env.SECRET)
       
-      
-      //finding user whos logged in
-      User.findById(decoded.userId)
-      .then(user => {
-        
       let updatedArray = [];
-  
-        if(req.body.type === 'delete') {
-          //edit userCoins based on id 
-          console.log('THIS IS USER', user)
-          
-          //filter through usercoins and compare with key from req.body.id returned from delete click
-          updatedArray = user.userCoins.filter(coin => {
-            for(coinName in coin) { 
-              if(coinName !== req.body.id) {
-                updatedArray.push(coin)
-              }
-            }
-            user.userCoins = updatedArray;
-            
-          })
-          user.save((err, result) => {
-            if(err) return console.log(err);
 
-            console.log('THIS IS THE RESULT', result)
-            res.send(result.userCoins);
-          });
-          // console.log('THIS IS UPDATED USER', user)
-          // console.log('we gonna delete something')
-        } else {
-          //send back user data to display coins
-          
+        User.findById(decoded.userId, (err, user) => {
 
-          
-          res.send(user);
-          console.log('THE TOKEN', decoded)
-          
-          }
+    //============================================================  
 
-          
-          
-        })
-      
-     
-      
+          if(req.body.type === 'onPageLoad') {
+            res.send(user.userCoins);
+    //============================================================  
+    
+          } else if(req.body.type === 'delete') {
+              //edit userCoins based on id 
+            //console.log('THIS IS USER', user)
+              
+            //filter through usercoins and compare with key from req.body.id returned from delete click
+              updatedArray = user.userCoins.filter(coin => {
+                for(coinName in coin) { 
+                  if(coinName !== req.body.id) {
+                    updatedArray.push(coin)
+                  };
+                };
+                user.userCoins = updatedArray;
+              });
+
+              user.save((err, result) => {
+                if(err) return console.log(err);
+                //console.log('THIS IS THE RESULT', result)
+                let userCoins = user.userCoins;
+                //console.log(userCoins)
+                res.send({ userCoins, errorMsg: `${req.body.id} deleted...`});
+              });
+      //=========================================================
+
+          } else if(req.body.type === 'update') { 
+              //figure out how to get coin id from target click in react
+              //search for coin in user db and update value with amount
+              //save user, return data
+
+
+                let newAmount = req.body.amount;
+                let coinsOfUser = user.userCoins
+
+                let newCoin;
+                let splicePosition;
+
+              //console.log('UPDATE REQ', req.body)
+                coinsOfUser.forEach((coin, index) => {
+                  for(coinName in coin) {              
+                    if(req.body.id === coinName) {
+                      splicePosition = index;
+                    };            
+                  };
+                    //console.log('HERES THE USER', user)
+                });
+
+                if(req.body.id && newAmount) {
+                  newCoin = { [req.body.id]: +newAmount }
+                } else {
+                  res.send({ msg: 'Amount not saved, try again' })
+                  return
+                };
+
+                coinsOfUser.splice(splicePosition, 1, newCoin);
+              
+                user.save((err, result) => {
+                  if(err) return console.log(err)
+                  console.log('THIS IS THE SAVED USER', result)
+                });
+              res.send(user.userCoins);
+
+          };  
+
+        });
+
+
     });
 
 }
