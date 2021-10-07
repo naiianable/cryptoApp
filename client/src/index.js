@@ -6,10 +6,11 @@ import { CookiesProvider } from 'react-cookie';
 
 
 ReactDOM.render(
-
+<React.StrictMode>
     <CookiesProvider>
       <App />
-    </CookiesProvider>,
+    </CookiesProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

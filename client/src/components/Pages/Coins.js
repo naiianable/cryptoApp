@@ -67,6 +67,7 @@ const Coins = () => {
                 </thead>
                 
                 <tbody>
+                    
                     {coinData.map(coin => 
                         <tr style={{textAlign: 'center'}} key={coin.id}>
                  
