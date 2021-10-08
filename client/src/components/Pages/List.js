@@ -1,9 +1,14 @@
 import React from 'react'
-import UserTable from '../Tables/UserTable';
 
+import UserTable from '../Tables/UserTable';
+import Fetch from '../FetchApi/Fetch';
 
 const List = () => {
 
+
+    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h';
+
+    let coinApi = Fetch(url);
 
     return (
         <>
@@ -35,7 +40,7 @@ const List = () => {
                     </thead>
 
                     <tbody >   
-                        <UserTable />
+                        <UserTable coinApi={coinApi} />
                     </tbody>
                    
                 </table>  

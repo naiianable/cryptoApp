@@ -171,7 +171,7 @@ module.exports = (app) => {
                 //console.log('THIS IS THE RESULT', result)
                 let userCoins = user.userCoins;
                 //console.log(userCoins)
-                res.send({ userCoins, errorMsg: `${req.body.id} deleted...`});
+                res.send({ userCoins, statusMsg: `${req.body.id} deleted...`});
               });
       //=========================================================
 
