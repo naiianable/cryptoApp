@@ -39,11 +39,11 @@ const Login = () => {
                         removeCookie('loggedIn')
                         removeCookie('token')
                         history.push('/');
-                    }, 1000 * 3600);
+                    }, 1800000);
 
                     setTimeout(() => {
                         alert('5 minutes left to sift for your protection!')
-                    }, 1000 * 3300);
+                    }, 1500000);
                     
                 
             } else if(data.errorMsg) {

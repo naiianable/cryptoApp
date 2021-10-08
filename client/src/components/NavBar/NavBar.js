@@ -55,11 +55,12 @@ const NavBar = () => {
     } else {
         navBar = 
 
-            <div>
-                <nav className="navbar navbar-light bg-light">
-               
-                    <p>Welcome to Sifter</p>
-                    
+            <div >
+                
+                <nav className="navbar navbar-light bg-light" >
+      
+                    <p >Welcome to Sifter</p>
+
                     <Link className="navbar-brand" to="/">Home</Link>
                     <Link className="navbar-brand" to="/about">About</Link>
                     <Link className="navbar-brand" to="/coins">Coins</Link>
