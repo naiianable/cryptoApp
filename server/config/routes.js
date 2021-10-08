@@ -200,7 +200,7 @@ module.exports = (app) => {
                 if(req.body.id && newAmount) {
                   newCoin = { [req.body.id]: +newAmount }
                 } else {
-                  res.send({ msg: 'Amount not saved, try again' })
+                  res.send({ errorMsg: 'Try again...' })
                   return
                 };
 
@@ -210,7 +210,7 @@ module.exports = (app) => {
                   if(err) return console.log(err)
                   console.log('THIS IS THE SAVED USER', result)
                 });
-              res.send(user.userCoins);
+              res.send({coinsOfUser,  successMsg: 'Coin saved!' });
 
           };  
 
