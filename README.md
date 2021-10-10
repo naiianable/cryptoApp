@@ -35,5 +35,6 @@ Seeing as most crytpo owners utilize multiple wallets, we wanted to create an ap
     
    <h3>Credits</h3>
    https://github.com/kosa2020
+   <br>
    https://github.com/YogaRecodingDNA
 
