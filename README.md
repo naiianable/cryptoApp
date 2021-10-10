@@ -4,7 +4,7 @@
 
 cryptoApp was designed as a place for crypto currency owners to track and monitor their crypto coins and earnings in one place.  After registration, users can select from the top 50 crypto coins on the market to add to their profile.  Then, they can add on the amount of each coin they own and track their earnings with up to minute updates courtesy of CoinGecko.  
 
-Seeing as most crytpo owners utilize multiple wallets, we wanted to create an app that allows them to consolidate all of that information into one place.  cryptoApp is NOT a cryto currency wallet nor can you buy and sell crypto.  cryptoApp is a crypto currency ledger that allows users to store their crypto and calculate their totals based on the amounts they enter and the current market values.  Users can also utilize this app as a way to forecast potential buys they might make or simply as an introduction to the world cryto currency.  Create an account, add crypto, add amounts, and see what happens!
+Seeing as most crytpo owners utilize multiple wallets, we wanted to create an app that allows them to consolidate all of that information into one place.  cryptoApp is NOT a cryto currency wallet nor is it used to buy and sell crypto.  cryptoApp is a crypto currency ledger that allows users to store their crypto and calculate their totals based on the amounts they enter and the current market values.  Users can also utilize this app as a way to forecast potential buys they might make or simply as an introduction to the world cryto currency.  Create an account, add crypto, add amounts, and see what happens!
 
 
 <h2>Resources</h2>
