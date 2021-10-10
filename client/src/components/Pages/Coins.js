@@ -1,4 +1,5 @@
 // import React, {  useState, useEffect } from 'react';
+import cookies from 'js-cookie';
 import CoinTable from '../Tables/CoinTable';
 
 import './coins.css';
@@ -18,7 +19,10 @@ const Coins = () => {
 
                 <thead >
                     <tr style={{textAlign: 'center'}}>
+                        {cookies.get('loggedIn') &&
                         <th></th>
+                        }
+                        
                         <th>RANK</th>
                         <th style={{width: '15%'}}>NAME</th>
                         <th>COIN</th>             

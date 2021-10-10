@@ -44,7 +44,8 @@ const NavBar = () => {
         navBar = 
             <div>
                 <nav className="navbar navbar-light bg-light">
-                    <img src={require('../../images/sifterImg.jpg').default} height={50} width={50} alt="" />
+                    <p >Welcome to Sifter</p>
+                    {/* <img src={require('../../images/sifterImg.jpg').default} height={50} width={50} alt="" /> */}
                     <Link className="navbar-brand" to="/">Home</Link>
                     <Link className="navbar-brand" to="/about">About</Link>
                     <Link className="navbar-brand" to="/coins">Coins</Link>

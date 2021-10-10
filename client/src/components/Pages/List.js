@@ -1,6 +1,6 @@
 import React from 'react'
 
-import UserTable from '../Tables/UserTable';
+import UserTable from '../Tables/User/UserTable';
 import Fetch from '../FetchApi/Fetch';
 
 const List = () => {
@@ -35,6 +35,7 @@ const List = () => {
                             <th >PRICE</th>
                             <th >24H PRICE CHANGE</th>
                             <th >24H % CHANGE</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>

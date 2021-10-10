@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import cookies from 'js-cookie';
-import AmountInput from './AmountInput';
+import InputAmount from './InputAmount';
 import DeleteCoin from './DeleteCoin';
-import TableData from './TableData';
+import TableData from '../TableData';
 
-import './table.css'
-
-
+import '../table.css';
 
 const UserTable = (props) => {
 
@@ -49,19 +47,17 @@ const UserTable = (props) => {
         // console.log('THIS IS USERCOINS', userCoins)
         //console.log('COIN ARRAY', displayArray)
 
-        
-        function coinAmount(c) {
-            props.userCoins.forEach(coin => {
-                for(let coinName in coin) {
-                    if(coinName === c) {
-                        console.log('COINNAME', coin[coinName])
-                        return coin[coinName]
+        //setting new object in display array for user amounts
+        displayArray.map(coin => {
+            return userCoins.forEach(userCoin => {
+                for(let coinName in userCoin) {
+                    if(coinName === coin.id) {
+                        coin.amount = userCoin[coinName]
+                        //console.log('THIS IS COIN', coin)
                     }
                 }
             })
-        }
-        //console.log('THIS IS DISPLAY ARRAY', displayArray)
-
+        })
 
 
 
@@ -71,11 +67,12 @@ const UserTable = (props) => {
             {displayArray.map(coin => 
                 <tr className="align-middle text-center"   key={coin.id}>
                
-                    <AmountInput coin={coin}/>
+                    <InputAmount coin={coin} />
                 
                     <TableData coin={coin} />
 
                     <DeleteCoin coin={coin} setUserCoins={setUserCoins} />
+                    {/* setUserCoins = { userCoins => setUserCoins(userCoins) } */}
             </tr>  
 
             )}

@@ -2,6 +2,7 @@ import React from 'react'
 
 const TableData = (props) => {
 
+    let total = (props.coin.amount * props.coin.current_price).toFixed(2)
 
     return (
         <>
@@ -12,6 +13,7 @@ const TableData = (props) => {
             <td>${props.coin.current_price.toFixed(2)}</td>
             <td>${props.coin.price_change_24h.toFixed(2)}</td>
             <td>{props.coin.price_change_percentage_24h.toFixed(2)}%</td>
+            <td>${total}</td>
 
             {/* <td className='add-coin' id={coin.id} onClick={deleteCoin} >
                 <FaRegTimesCircle style={{ color: 'Red'}}/>
