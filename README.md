@@ -32,4 +32,8 @@ Seeing as most crytpo owners utilize multiple wallets, we wanted to create an ap
       <li>Express Validator</li>
       <li>JWT</li>
     </ul>
+    
+   <h3>Credits</h3>
+   https://github.com/kosa2020
+   https://github.com/YogaRecodingDNA
 
