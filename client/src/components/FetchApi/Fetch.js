@@ -14,18 +14,6 @@ const useFetch = (url) => {
          .catch((err) => console.log(err)); 
      }, [url]);
 
-    // useEffect(() => {
-    //     fetch(url)
-    //     .then(res => res.json())
-    //     .then((data) => {
-    //         // console.log('THIS IS COIN DATA IN FETCH', data);
-    //         return setFetchData(data);
-    //     });
-    
-    // }, [url]);
-
-    // console.log('THIS IS GET DATA', fetchData)
-
     return (
         fetchData
     )
