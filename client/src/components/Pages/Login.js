@@ -59,12 +59,7 @@ const Login = () => {
         .catch((err) => console.log(err));
 
         console.log('THIS IS COOKIES', cookie);
-
-
     }
-
-
-
     
     const handleChange = (e) => {
         if(e.target.name === 'username') {

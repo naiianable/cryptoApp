@@ -43,17 +43,9 @@ const Register = () => {
             }
             
             console.log('THIS IS DATA', data)
-        
-
         })
         .catch((err) => console.log(err));
-            
-
-
     }
-
-        
-    
     
     const handleChange = (e) => {
         if (e.target.name === 'email') {

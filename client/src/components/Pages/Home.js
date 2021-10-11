@@ -7,7 +7,6 @@ const Home = () => {
             <div className="text-center">
                 <p>Track your crypto coins in one place</p>
             </div>    
-            
         </div>
     )
 }

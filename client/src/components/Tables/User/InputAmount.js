@@ -27,7 +27,6 @@ const InputAmount = (props) => {
                 setSaveIcon(false)
                 // console.log('NO MAKE APPEAR')
             }
-
         //console.log('THIS IS SAVE AMOUNT', amount) 
     }, [amount])
         

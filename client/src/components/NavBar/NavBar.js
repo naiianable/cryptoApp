@@ -8,29 +8,6 @@ import { useCookies } from 'react-cookie';
 const NavBar = () => {
 
     const [cookie, setCookie,  removeCookie] = useCookies(['token', 'loggedIn']);
-    // const [userName, setUserName] = useState();
-
-    // let body = JSON.stringify({
-    //     token: cookies.get('token')
-    // });
-
-    // useEffect(() => {
-    //    fetch('http://localhost:5000/list', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: body
-    // })
-    // .then(res => res.json())
-    // .then(data => {
-    //     setUserName(data.username);
-    //     console.log(data)
-    // }) 
-    // })
-    
-
-    // console.log('THIS IS THE USERNAME', userName)
 
     const logout = () => {
         removeCookie('token');
@@ -38,7 +15,6 @@ const NavBar = () => {
     }
 
     let navBar;
-
 
     if(!cookie.loggedIn) {
         navBar = 
@@ -57,7 +33,6 @@ const NavBar = () => {
         navBar = 
 
             <div >
-                
                 <nav className="navbar navbar-light bg-light" >
       
                     <p >Welcome to Sifter</p>
